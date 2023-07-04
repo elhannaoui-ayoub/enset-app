@@ -1,0 +1,34 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Computer",
+      "price": "5600",
+      "checked": true
+    },
+    {
+      "name": "Product du test 1",
+      "price": "999.99",
+      "checked": true,
+      "id": 2
+    },
+    {
+      "name": "Product du test 2",
+      "price": "88.99",
+      "checked": true,
+      "id": 3
+    },
+    {
+      "name": "Product du test 4",
+      "price": "123.99",
+      "checked": true,
+      "id": 4
+    },
+    {
+      "name": "Product du test 5",
+      "price": "555.99",
+      "checked": true,
+      "id": 5
+    }
+  ]
+}
