@@ -3,7 +3,7 @@
     {
       "id": 1,
       "name": "Computer",
-      "price": "5600",
+      "price": "5601",
       "checked": true
     },
     {
@@ -29,6 +29,12 @@
       "price": "555.99",
       "checked": true,
       "id": 5
+    },
+    {
+      "name": "Product 9 7",
+      "price": "1200",
+      "checked": true,
+      "id": 6
     }
   ]
 }

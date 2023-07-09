@@ -33,10 +33,23 @@
                           <i class="bi bi-trash" ></i>
                         </button>>
                       </td>
+                      <td>
+                        <button (click)="handleEditProduct(product)" class="btn btn-outline-info">
+                          <i class="bi bi-pencil" ></i>
+                        </button>>
+                      </td>
                     </tr>
                 </tbody>
             </table>
-
+            <ul class="nav nav-pills">
+              <li *ngFor="let page of [].constructor(this.totalPages);let i=index" >
+                <button (click)="handleGoToPage(i+1)"
+                        [ngClass]="currentPage==(i+1)?'btn btn-success m-1':'btn btn-outline-success m-1'"
+                        >
+                    {{i+1}}
+                </button>
+              </li>
+            </ul>
         </div>
     </div>
 </div>

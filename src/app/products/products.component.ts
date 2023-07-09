@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {ProductService} from "../services/product.service";
 import {Product} from "../model/product.model";
 import {Observable} from "rxjs";
+import {Router} from "@angular/router";
 
 
 @Component({
@@ -14,7 +15,11 @@ export class ProductsComponent implements OnInit{
 
   products:Array<Product> =[];
   public keyword:string="";
-  constructor(private ps:ProductService) {
+  totalPages:number=0;
+  pageSize=3;
+
+  currentPage:number=1;
+  constructor(private ps:ProductService,private router:Router) {
 
   }
   handleCheckProduct(product:Product){
@@ -43,13 +48,21 @@ export class ProductsComponent implements OnInit{
 
   }
   ngOnInit(): void {
-    this.getProducts();
+    this.searchProducts();
   }
-  getProducts(){
-   this.ps.getProducts(1,5).subscribe(
+  searchProducts(){
+   this.ps.searchProducts(this.keyword,this.currentPage,this.pageSize).subscribe(
      {
-       next:data=>{
-         this.products=data;
+       next:(resp)=>{
+         this.products=resp.body as Product[];
+         let totalProducts:number =parseInt(resp.headers.get('x-total-count')!);
+         console.log(totalProducts);
+         this.totalPages=Math.floor(totalProducts/this.pageSize);
+
+         if(totalProducts % this.pageSize!=0){
+          this.totalPages++;
+         }
+         console.log(this.totalPages);
        },
        error:err => {
         console.log(err);
@@ -58,13 +71,23 @@ export class ProductsComponent implements OnInit{
    )
   }
 
-  searchProducts() {
-    this.ps.searchProducts(this.keyword).subscribe(
+  /*searchProducts() {
+    this.currentPage=1;
+    this.totalPages=0;
+    this.ps.getProducts(this.keyword,this.currentPage,this.pageSize).subscribe(
       {
         next:data=>{
           this.products=data;
         }
       }
     )
+  }*/
+  handleGoToPage(page:number){
+  this.currentPage=page;
+  this.searchProducts()
+  }
+
+  handleEditProduct(product: Product) {
+    this.router.navigateByUrl(`/editProduct/${product.id}`)
   }
 }
